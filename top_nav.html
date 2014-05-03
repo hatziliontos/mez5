@@ -1,6 +1,14 @@
 <html>
 <meta charset="ISO-8859-7">
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script language='JavaScript' type='text/JavaScript'>
+function load() {
+//    data : { filename : 'http://iot2014iot.no-ip.org:22223/Backup/lan_ip.log'},
+  jQuery.get('http://mez5.no-ip.org:22225/Backup/lan_ip.log',function (data) {document.getElementById("lanip").innerHTML="LANIP:"+data;},'text');
+  jQuery.get('http://mez5.no-ip.org:22225/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip").innerHTML="WANIP:"+data;},'text');
+}
+</script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
 <style type="text/css">
 body {
@@ -11,7 +19,7 @@ body {
    }
 </style>
 </head>
-<body>
+<body onload="load()">
 <h3>Συνεχής Ενεργειακή Επιτήρηση Μεζονέτας 5</h3>
 <p>
    <a href="epitirisi.html" target="menu">Ζωντανή Επιτήρηση</a> |
@@ -21,5 +29,9 @@ body {
    <a href="about.html" target="content">Σχετικά</a> | 
    <a href="help.html" target="content">Βοήθεια</a> | 
 </p>
+<p>
+   <label id="lanip" >LANIP:</label> | 
+   <label id="wanip" >WANIP:</label>
+</p> 
 </body>
 </html>
