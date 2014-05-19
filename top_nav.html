@@ -1,37 +1,43 @@
+<!--
+-->
 <html>
-<meta charset="ISO-8859-7">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script language='JavaScript' type='text/JavaScript'>
 function load() {
-//    data : { filename : 'http://iot2014iot.no-ip.org:22223/Backup/lan_ip.log'},
-  jQuery.get('http://mez5.no-ip.org:22224/Backup/lan_ip.log',function (data) {document.getElementById("lanip").innerHTML="LANIP:"+data;},'text');
-  jQuery.get('http://mez5.no-ip.org:22224/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip").innerHTML="WANIP:"+data;},'text');
+  url_='http://mez5.no-ip.org:22224';
+  jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip").innerHTML="LANIP:"+data;},'text');
+  jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip").innerHTML="WANIP:"+data;},'text');
+  url_='http://htmlpreview.github.io/?https://github.com/hatziliontos/common/blob/master/';
+  document.getElementById("about").href=url_+'about.html';
+  document.getElementById("help").href=url_+'help.html';
+  document.getElementById("newsletter").href=url_+'newsletter.html';
 }
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
 <style type="text/css">
 body {
    font-family:verdana,arial,sans-serif;
-   font-size:10pt;
-   margin:10px;
+   font-size:9pt;
+   margin:9px;
    background-color:#a08029;
    }
 </style>
 </head>
 <body onload="load()">
-<h3>Συνεχής Ενεργειακή Επιτήρηση Μεζονέτας 5</h3>
+<h4>Συνεχής Ενεργειακή Επιτήρηση Ορεστιάδας</h4>
 <p>
    <a href="epitirisi.html" target="menu">Ζωντανή Επιτήρηση</a> |
-   <a href="epitirisiold.html" target="menu">Επιτήρηση Αρχείου</a> |
-   <a href="local_history.html" target="menu">Τοπικό Ιστορικό</a> | 
+   <a href="local_history.html" target="menu">Επιτήρηση Αρχείου</a> | 
    <a href="service.html" target="menu">Service</a> | 
-   <a href="about.html" target="content">Σχετικά</a> | 
-   <a href="help.html" target="content">Βοήθεια</a> | 
+   <a id="about"      href="about.html" target="menu">Σχετικά</a> | 
+   <a id="help"       href="help.html" target="menu">Βοήθεια</a> | 
+   <a id="newsletter" href="newsletter.html" target="menu">Ανακοινώσεις</a> | 
 </p>
 <p>
    <label id="lanip" >LANIP:</label> | 
-   <label id="wanip" >WANIP:</label>
-</p> 
+   <label id="wanip" >WANIP:</label> |
+</p>   
 </body>
 </html>
