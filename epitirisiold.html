@@ -1,5 +1,5 @@
 <html>
-<meta charset="ISO-8859-7">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
 <style type="text/css">
@@ -11,31 +11,88 @@ body {
    }
 </style>
 </head>
-<body>
-<h3>Επιτήρηση</h3>
-<h4>...ανά 20secs</h4>
-<a href="last01hr_20sec.html" target="content">Τελευταία ώρα</a><br /> 
-<a href="last04hr_20sec.html" target="content">Τελευταίο 4ωρο</a><br />
-<a href="last06hr_20sec.html" target="content">Τελευταίο 6ωρο</a><br />
-<a href="last08hr_20sec.html" target="content">Τελευταίο 8ωρο</a><br />
-<a href="last12hr_20sec.html" target="content">Τελευταίο 12ωρο</a><br />
-<a href="last18hr_20sec.html" target="content">Τελευταίο 18ωρο</a><br />
-<a href="last24hr_20sec.html" target="content">Τελευταίο 24ωρο</a><br />
-<h4>...ανά 10min</h4>
-<a href="last01hr_10min.html" target="content">Τελευταία ώρα</a><br /> 
-<a href="last04hr_10min.html" target="content">Τελευταίο 4ωρο</a><br />
-<a href="last06hr_10min.html" target="content">Τελευταίο 6ωρο</a><br />
-<a href="last08hr_10min.html" target="content">Τελευταίο 8ωρο</a><br />
-<a href="last12hr_10min.html" target="content">Τελευταίο 12ωρο</a><br />
-<a href="last18hr_10min.html" target="content">Τελευταίο 18ωρο</a><br />
-<a href="last24hr_10min.html" target="content">Τελευταίο 24ωρο</a><br />
-<h4>...ανά 1hr</h4>
-<a href="last01hr_60min.html" target="content">Τελευταία ώρα</a><br /> 
-<a href="last04hr_60min.html" target="content">Τελευταίο 4ωρο</a><br />
-<a href="last06hr_60min.html" target="content">Τελευταίο 6ωρο</a><br />
-<a href="last08hr_60min.html" target="content">Τελευταίο 8ωρο</a><br />
-<a href="last12hr_60min.html" target="content">Τελευταίο 12ωρο</a><br />
-<a href="last18hr_60min.html" target="content">Τελευταίο 18ωρο</a><br />
-<a href="last24hr_60min.html" target="content">Τελευταίο 24ωρο</a><br />
+<body onload="autodate()">
+<script language='JavaScript' type='text/JavaScript'>
+function autodate() {
+   var daten=new Date();
+  document.form1.etos.value=daten.getFullYear();
+  document.form1.mhnas.value=1+1*daten.getMonth();
+  document.form1.mera.value=daten.getDate();
+  //alert(date_);
+}
+</script>
+
+<script language='JavaScript' type='text/JavaScript'>
+function GetDate(){
+  var mera1=1*document.form1.mera.value;
+  var mhnas1=1*document.form1.mhnas.value;
+  var etos1=1*document.form1.etos.value;
+  var mera2=1*mera1+1;
+  var mhnas2=1*mhnas1;
+  var etos2=1*etos1;
+
+if ((mera1==30)&&((mhnas1==04)||(mhnas1==06)||(mhnas1==09)||(mhnas1==11))) {
+    mhnas2=1*mhnas1+1; mera2=01;
+}
+if ((mera1==31)&&((mhnas1==01)||(mhnas1==03)||(mhnas1==05)||(mhnas1==07)||(mhnas1==08)||(mhnas1==10)||(mhnas1==12))) {
+    mhnas2=1*mhnas1+1;
+    if (mhnas2==13) {
+      mhnas2=01; etos2=1*etos1+1;
+    }
+    mera2=01;
+}
+if ((mera1==28)&&(mhnas1==02)) {
+  mhnas2=03; mera2=01;
+  if ((etos1==2016)||(etos1==2020)||(etos1==2024)) {
+    mhnas2=02; mera2=29;
+  }
+}
+if ((mera1==29)&&(mhnas1==02)) {
+  mera1=28; mhnas2=03; mera2=01;
+  if ((etos1==2016)||(etos1==2020)||(etos1==2024)) {
+    mera1=29; mhnas2=03; mera2=01;
+  }
+}
+document.getElementById("frame1").src="http://api.thingspeak.com/channels/10792/charts/1?"+
+  "title="+mera1+"/"+mhnas1+"/"+etos1+"&"+
+  "xaxis=DateTime&"+
+  "yaxis=1phase Watts&"+
+  "color=red&"+
+  "bgcolor=&"+
+  "type=column&"+
+  "width=1000&"+
+  "height=230&"+
+  "dynamic=false&"+
+  "step=true&"+
+//  "export=true&"+
+  "results=4320&"+
+  "start="+etos1+"-"+mhnas1+"-"+mera1+"%2000:00:00&"+
+  "end="  +etos1+"-"+mhnas1+"-"+mera1+"%2023:59:59&"+
+  "average=60&";
+  document.getElementById("frame2").src="http://api.thingspeak.com/channels/10792/charts/1?"+
+  "title="+mera2+"/"+mhnas2+"/"+etos2+"&"+
+  "xaxis=DateTime&"+
+  "yaxis=1phase Watts&"+
+  "color=red&"+
+  "bgcolor=&"+
+  "type=column&"+
+  "width=1000&"+
+  "height=230&"+
+  "dynamic=false&"+
+  "step=true&"+
+//  "export=true&"+
+  "results=4320&"+
+  "start="+etos2+"-"+mhnas2+"-"+mera2+"%2000:00:00&"+
+  "end="  +etos2+"-"+mhnas2+"-"+mera2+"%2023:59:59&"+
+  "average=60&";
+}
+</script>
 </body>
+
+<form name="form1" >
+    <a href="javascript:GetDate()">Graph</a>
+    Year:<input type=text name="etos" value="2014">Month:<input type=text name="mhnas" value="04">Day:<input type=text name="mera" value="12"><br>
+</form>
+    <iframe id="frame1" width="1000" height="230" style="border: 1px solid #cccccc;" src=""></iframe>
+    <iframe id="frame2" width="1000" height="230" style="border: 1px solid #cccccc;" src=""></iframe>
 </html>
