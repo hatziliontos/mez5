@@ -1,0 +1,57 @@
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+<title>Συνεχής Ενεργειακή Επιτήρηση</title>
+<style type="text/css">
+body {
+   font-family:verdana,arial,sans-serif;
+   font-size:9pt;
+   margin:10px;
+   background-color:#ff9900;
+   }
+</style>
+</head>
+<body onload="autodate()">
+<script language='JavaScript' type='text/JavaScript'>
+function autodate() {
+}
+</script>
+<script language='JavaScript' type='text/JavaScript'>
+function graph(){
+document.getElementById("frame1").width=document.form1.width.value;
+document.getElementById("frame1").height=document.form1.height.value;
+document.getElementById("frame1").src="http://api.thingspeak.com/channels/10792/charts/1?"+
+  "title="  +document.form1.title.value+"&"+
+  "xaxis="  +document.form1.xaxis.value+"&"+
+  "yaxis="  +document.form1.yaxis.value+"&"+
+  "color="  +document.form1.linecolor.value+"&"+
+  "bgcolor="+document.form1.linecolor.value+"&"+
+  "type="   +document.form1.type.value+"&"+
+  "width="  +document.form1.width.value+"&"+
+  "height=" +document.form1.height.value+"&"+
+  "dynamic="+document.form1.dynamic.value+"&"+
+  "step="   +document.form1.step.value+"&"+
+  "export=" +document.form1.export.value+"&"+
+  "results=4320&"+
+//  "start=&"+
+//  "end=&"+
+  "average=60&";
+}
+</script>
+</body>
+
+<form name="form1" >
+  Title: <input type=text name="title" value="Title"> Chart’s x-axis label: <input type=text name="xaxis" value="Date"> 
+  Chart’s y-axis label: <input type=text name="yaxis" value="Name"> 
+  Line color: <input type="color" name="linecolor"> Background color: <input type="color" name="bgcolor"><br>
+  Type:    <select name="type"><option value="spline">spline</option><option value="line">line</option>
+  <option value="bar">bar</option><option value="column">column</option></select>
+  Dynamic: <select name="dynamic"><option value="true">true</option><option value="false">false</option></select>
+  Step:    <select name="step"   ><option value="true">true</option><option value="false">false</option></select>
+  Export:  <select name="export" ><option value="true">true</option><option value="false">false</option></select>
+  Width: <input type=text name="width" value="1000"> Height: <input type=text name="height" value="400"><br>
+  Start date: <input type="datetime-local" name="start"> End date: <input type="datetime-local" name="end"><br>
+  <a href="javascript:graph()">Graph</a>
+</form>
+<iframe id="frame1" width="1000" height="400" style="border: 1px solid #cccccc;" src=""></iframe>
+</html>
