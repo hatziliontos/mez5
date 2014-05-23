@@ -13,6 +13,12 @@ function load() {
   document.getElementById("about").href=url_+'about.html';
   document.getElementById("help").href=url_+'help.html';
   document.getElementById("newsletter").href=url_+'newsletter.html';
+  curval_();
+}
+function curval_() {
+  url_='https://api.thingspeak.com/channels/10792/fields/1/last';
+  jQuery.get(url_,function (data) {document.getElementById("curval").innerHTML="CurVal:"+data+"Amps";},'text');
+  setTimeout(curval_, 20000);
 }
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
@@ -26,7 +32,7 @@ body {
 </style>
 </head>
 <body onload="load()">
-<h4>Συνεχής Ενεργειακή Επιτήρηση Μεζονέτας 5</h4>
+<h4>Συνεχής Ενεργειακή Επιτήρηση Ορεστιάδας</h4>
 <p>
    <a href="epitirisi.html" target="menu">Ζωντανή Επιτήρηση</a> |
    <a href="local_history.html" target="menu">Επιτήρηση Αρχείου</a> | 
@@ -38,6 +44,7 @@ body {
 <p>
    <label id="lanip" >LANIP:</label> | 
    <label id="wanip" >WANIP:</label> |
+   <label id="curval" >CurVal:</label> |
 </p>   
 </body>
 </html>
